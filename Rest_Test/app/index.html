@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>测试文件上传</title></head>
+<body>
+<form action="http://127.0.0.1:8080/rest/upload" method="post" enctype="multipart/form-data">
+    姓名：<input type="text" name="uname"><br>
+    照片：<input type="file" name="pic"><br>
+    <input type="submit" value="上传">
+    <input type="reset" value="重置">
+</form>
+<form>
+<img src="http://localhost:8080/image/verification_code">
+<input type="text" name="captcha_code" title="">
+    <button type="submit" value="submit">Submit</button>
+</form>
+</body>
+</html>
