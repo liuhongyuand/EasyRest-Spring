@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.simpacct">
+        <context:exclude-filter type="annotation" expression="com.simpacct.framework.core.annotations.method.AutoInject"/>
+    </context:component-scan>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:annotation-config/>
+
+    <import resource="druid_conf.properties.xml"/>
+    <import resource="mybatis_conf.xml"/>
+
+    <bean id="requestPreparedStep" class="com.simpacct.framework.core.services.workStep.impl.RequestPreparedStep" />
+    <bean id="requestValidateWorkStep" class="com.simpacct.framework.core.services.workStep.impl.RequestValidateWorkStep" />
+    <bean id="valueInjectWorkStep" class="com.simpacct.framework.core.services.workStep.impl.ValueInjectWorkStep" />
+    <bean id="permissionCheckWorkStep" class="com.simpacct.framework.core.services.workStep.impl.PermissionCheckWorkStep" />
+    <bean id="customizedCheckStep" class="com.simpacct.framework.core.services.workStep.impl.CustomizedCheckStep" />
+    <bean id="fieldDefinedCheckWorkStep" class="com.simpacct.framework.core.services.workStep.impl.FieldDefinedCheckWorkStep" />
+    <bean id="historyRecordStep" class="com.simpacct.framework.core.services.workStep.impl.HistoryRecordStep" />
+
+    <bean id="requestDispatcher" class="com.simpacct.framework.core.controllers.RequestServiceEntranceController" init-method="initEnvironments">
+        <property name="workSteps">
+            <list>
+                <ref bean="requestPreparedStep"/>
+                <ref bean="requestValidateWorkStep"/>
+                <ref bean="valueInjectWorkStep"/>
+                <ref bean="permissionCheckWorkStep"/>
+                <ref bean="customizedCheckStep"/>
+                <ref bean="fieldDefinedCheckWorkStep"/>
+            </list>
+        </property>
+        <property name="beforeResponseSteps">
+        <list>
+            <ref bean="historyRecordStep"/>
+        </list>
+    </property>
+    </bean>
+    <bean id="globalConfiguration" class="com.simpacct.framework.core.utils.ImportFileUtils" init-method="initSystemPropertyFile"/>
+    <bean id="historyService" class="com.simpacct.framework.core.services.history.impl.HistoryServiceImpl"/>
+</beans>
