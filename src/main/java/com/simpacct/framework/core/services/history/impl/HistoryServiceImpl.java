@@ -1,6 +1,5 @@
 package com.simpacct.framework.core.services.history.impl;
 
-import com.simpacct.framework.core.model.pojo.History;
 import com.simpacct.framework.core.services.history.api.HistoryService;
 
 /**
@@ -18,9 +17,6 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public void record(String user, String message) {
-        History history = new History();
-        history.setUserId(user);
-        history.setMessage(message);
     }
 
 }

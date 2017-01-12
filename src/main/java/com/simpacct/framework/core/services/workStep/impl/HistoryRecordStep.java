@@ -6,8 +6,13 @@ import com.simpacct.framework.core.model.response.ResponseEntity;
 import com.simpacct.framework.core.model.response.ResponseStatus;
 import com.simpacct.framework.core.services.history.api.HistoryService;
 import com.simpacct.framework.core.services.workStep.api.WorkStep;
+import com.simpacct.framework.core.utils.LogUtils;
 import com.simpacct.framework.core.utils.json.JsonTranslation;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by liuhongyu.louie on 2017/1/10.
@@ -23,7 +28,25 @@ public class HistoryRecordStep implements WorkStep {
         if (((ResponseObj) t).getResponseObject() instanceof ResponseEntity){
             ResponseEntity responseEntity = (ResponseEntity) ((ResponseObj) t).getResponseObject();
             if (ResponseStatus.SUCCESS.getCode().equals(responseEntity.getCode()) && responseObj.getRequestModel().getClass().isAnnotationPresent(HistoryRequired.class)){
-                historyService.record(JsonTranslation.object2JsonString(responseObj.getRequestModel()));
+                HistoryRequired historyRequired = responseObj.getRequestModel().getClass().getAnnotation(HistoryRequired.class);
+                if (historyRequired.value().length < 1) {
+                    historyService.record(JsonTranslation.object2JsonString(responseObj.getRequestModel()));
+                } else {
+                    Map<String, Object> record = new HashMap<>();
+                    for (String fieldName : historyRequired.value()) {
+                        try {
+                            Field field = responseObj.getRequestModel().getClass().getDeclaredField(fieldName);
+                            field.setAccessible(true);
+                            Object value = field.get(responseObj.getRequestModel());
+                            record.put(fieldName, value);
+                        } catch (NoSuchFieldException | IllegalAccessException e) {
+                            LogUtils.error(e.getMessage(), e);
+                        }
+                    }
+                    if (record.size() > 0) {
+                        historyService.record(JsonTranslation.object2JsonString(record));
+                    }
+                }
             }
         }
         return t;

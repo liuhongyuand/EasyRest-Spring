@@ -155,11 +155,6 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>com.octo.captcha</groupId>
-            <artifactId>jcaptcha</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.cage</groupId>
             <artifactId>cage</artifactId>
             <version>1.0</version>

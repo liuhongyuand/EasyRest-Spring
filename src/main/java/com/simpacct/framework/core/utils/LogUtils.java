@@ -21,20 +21,32 @@ public class LogUtils {
         }
     }
 
-    public static void debug(String string){
-        LOGGER.debug(string);
-    }
-
-    public static void debug(Object obj){
-        LOGGER.debug(GSON.toJson(obj));
-    }
-
     public static void info(String string){
         LOGGER.info(string);
     }
 
     public static void info(Object obj){
         LOGGER.info(GSON.toJson(obj));
+    }
+
+    public static void debug(String string, Class aClass){
+        LOGGER.debug("From " + aClass.getName() + ": " + string);
+    }
+
+    public static void debug(Object obj, Class aClass){
+        LOGGER.debug("From " + aClass.getName() + ": " + GSON.toJson(obj));
+    }
+
+    public static void info(String string, Class aClass){
+        LOGGER.info("From " + aClass.getName() + ": " + string);
+    }
+
+    public static void info(Object obj, Class aClass){
+        LOGGER.info("From " + aClass.getName() + ": " + GSON.toJson(obj));
+    }
+
+    public static void error(String message, Exception e){
+        LOGGER.error(message, e);
     }
 
 }

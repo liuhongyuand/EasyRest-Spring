@@ -74,7 +74,7 @@ public class SystemEntranceController {
     }
 
     private void rollbackConfigurations(HttpServletRequest request, HttpServletResponse response) {
-        LogUtils.debug("Complete " + request.getRequestURI() + " request.");
+        LogUtils.debug("Complete " + request.getRequestURI() + " request.", this.getClass());
     }
 
     public static void responseHeaderConfigurations(HttpServletResponse response) {
