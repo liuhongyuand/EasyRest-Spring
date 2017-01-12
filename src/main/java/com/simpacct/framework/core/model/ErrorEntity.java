@@ -6,7 +6,7 @@ import com.simpacct.framework.core.utils.StringUtils;
  * The exception model
  * Created by liuhongyu.louie on 2016/10/1.
  */
-public class ErrorEntityERROR {
+public class ErrorEntity {
 
     private String Code;
     private String Message;
