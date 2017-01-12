@@ -7,7 +7,7 @@ import static com.simpacct.business.configuration.RequestPath.System.*;
 /**
  * Created by liuhongyu.louie on 2016/9/28.
  */
-public class RequestPath1234 {
+public class RequestPath {
 
     private static final SkipList<String> SKIP_LIST = new SkipList<>();
 
