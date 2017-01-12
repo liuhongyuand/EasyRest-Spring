@@ -4,6 +4,7 @@ import com.simpacct.framework.configuration.GlobalParameters;
 import com.simpacct.framework.core.model.file.FileUploadModel;
 import com.simpacct.framework.core.model.request.RequestModel;
 import com.simpacct.framework.core.model.HttpEntity;
+import com.simpacct.framework.core.utils.json.JsonTranslation;
 
 import java.lang.reflect.Field;
 import java.net.URLDecoder;
@@ -60,10 +61,14 @@ public class ValueInjectWorkStep extends AbstractWorkStep {
 
     private String getValue(Object value){
         if (value instanceof String[]){
-            return String.valueOf(((String[]) value)[0]);
+            return toJsonValue(((String[]) value)[0]);
         } else {
-            return String.valueOf(value);
+            return toJsonValue(value);
         }
+    }
+
+    private String toJsonValue(Object obj){
+        return JsonTranslation.object2JsonString(obj);
     }
 
 }
