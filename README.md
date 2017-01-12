@@ -1,7 +1,5 @@
 ## Framework for REST
 
-## Java Server
-
 ### Framework: Spring, Mybatis, Druid.
 
 #### Infrastructure work: 
