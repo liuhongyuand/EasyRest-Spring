@@ -14,7 +14,3 @@
 * ###### Customized condition check
 * ###### Global exception catch
 * ###### Json & Jsonp support
-
-#### Business work: 
-
-* ###### Waiting for request...
