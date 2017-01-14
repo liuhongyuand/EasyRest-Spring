@@ -11,8 +11,8 @@
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <context:annotation-config/>
 
-    <import resource="druid_conf.properties.xml"/>
-    <import resource="mybatis_conf.xml"/>
+    <!--<import resource="druid_conf.properties.xml"/>-->
+    <!--<import resource="mybatis_conf.xml"/>-->
 
     <bean id="requestPreparedStep" class="com.simpacct.framework.core.services.workStep.impl.RequestPreparedStep" />
     <bean id="requestValidateWorkStep" class="com.simpacct.framework.core.services.workStep.impl.RequestValidateWorkStep" />

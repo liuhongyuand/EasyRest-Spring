@@ -68,7 +68,11 @@ public class ValueInjectWorkStep extends AbstractWorkStep {
     }
 
     private String toJsonValue(Object obj){
-        return JsonTranslation.object2JsonString(obj);
+        String result = JsonTranslation.object2JsonString(obj);
+        if (result.startsWith("\"") && result.endsWith("\"")){
+            return result.substring(1, result.length() - 1);
+        }
+        return result;
     }
 
 }
