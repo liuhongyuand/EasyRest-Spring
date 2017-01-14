@@ -5,7 +5,11 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:/mapping/*.xml"/>
+        <!--<property name="mapperLocations" value="classpath:/mapping/*"/>-->
+    </bean>
+
+    <bean class="org.springframework.transaction.support.DefaultTransactionDefinition">
+        <property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"/>
     </bean>
 
     <!-- DAO interface in package，Spring automatically search for its class -->

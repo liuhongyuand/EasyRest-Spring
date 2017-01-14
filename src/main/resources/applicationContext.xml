@@ -11,8 +11,8 @@
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <context:annotation-config/>
 
-    <!--<import resource="druid_conf.properties.xml"/>-->
-    <!--<import resource="mybatis_conf.xml"/>-->
+    <import resource="druid_conf.properties.xml"/>
+    <import resource="mybatis_conf.xml"/>
 
     <bean id="requestPreparedStep" class="com.simpacct.framework.core.services.workStep.impl.RequestPreparedStep" />
     <bean id="requestValidateWorkStep" class="com.simpacct.framework.core.services.workStep.impl.RequestValidateWorkStep" />
@@ -20,7 +20,9 @@
     <bean id="permissionCheckWorkStep" class="com.simpacct.framework.core.services.workStep.impl.PermissionCheckWorkStep" />
     <bean id="customizedCheckStep" class="com.simpacct.framework.core.services.workStep.impl.CustomizedCheckStep" />
     <bean id="fieldDefinedCheckWorkStep" class="com.simpacct.framework.core.services.workStep.impl.FieldDefinedCheckWorkStep" />
+    <bean id="transactionProcessStep" class="com.simpacct.framework.core.services.workStep.impl.TransactionProcessStep" />
     <bean id="historyRecordStep" class="com.simpacct.framework.core.services.workStep.impl.HistoryRecordStep" />
+    <bean id="transactionCommitStep" class="com.simpacct.framework.core.services.workStep.impl.TransactionCommitStep" />
 
     <bean id="requestDispatcher" class="com.simpacct.framework.core.controllers.RequestServiceEntranceController" init-method="initEnvironments">
         <property name="workSteps">
@@ -29,13 +31,15 @@
                 <ref bean="requestValidateWorkStep"/>
                 <ref bean="valueInjectWorkStep"/>
                 <ref bean="permissionCheckWorkStep"/>
-                <ref bean="customizedCheckStep"/>
                 <ref bean="fieldDefinedCheckWorkStep"/>
+                <ref bean="customizedCheckStep"/>
+                <ref bean="transactionProcessStep" />
             </list>
         </property>
         <property name="beforeResponseSteps">
         <list>
             <ref bean="historyRecordStep"/>
+            <ref bean="transactionCommitStep" />
         </list>
     </property>
     </bean>

@@ -23,12 +23,21 @@ public class HttpEntity {
     private HttpServletResponse response;
     private RequestModel requestModel;
     private List<Class> allowedMethods;
+    private TransactionContext transactionContext;
 
     public HttpEntity(HttpServletRequest request, HttpServletResponse response, RequestModel requestModel, List<Class> allowedMethods){
         this.request = request;
         this.response = response;
         this.requestModel = requestModel;
         this.allowedMethods = allowedMethods;
+    }
+
+    public TransactionContext getTransactionContext() {
+        return transactionContext;
+    }
+
+    public void setTransactionContext(TransactionContext transactionContext) {
+        this.transactionContext = transactionContext;
     }
 
     public HttpServletRequest getRequest() {

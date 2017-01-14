@@ -4,7 +4,8 @@ import com.simpacct.business.configuration.RequestPath;
 import com.simpacct.business.configuration.RestConfig;
 import com.simpacct.framework.core.model.HttpEntity;
 import com.simpacct.framework.core.model.ModelFactory;
-import com.simpacct.framework.core.model.ResponseObj;
+import com.simpacct.framework.core.model.TransactionContext;
+import com.simpacct.framework.core.model.response.ResponseObj;
 import com.simpacct.framework.core.services.workStep.api.WorkStep;
 import com.simpacct.framework.core.utils.LogUtils;
 import com.simpacct.framework.exception.PageNotFoundException;
@@ -39,15 +40,24 @@ public class RequestServiceEntranceController{
         String requestPath = request.getRequestURI().replace(RequestPath.System.SystemName, "");
         if (DISPATCHER_MAPPING.containsKey(requestPath)){
             ModelFactory modelFactory = DISPATCHER_MAPPING.get(requestPath);
-            LogUtils.info("Start process request: " + requestPath);
+            LogUtils.info("Start process request: " + requestPath, this.getClass());
             final HttpEntity[] entity = {new HttpEntity(request, response, modelFactory.createModel(), URL_MAPPING_METHOD.get(requestPath))};
-            workSteps.forEach((step) -> entity[0] = step.executeStep(entity[0]));
-            final ResponseObj[] responseObj = {new ResponseObj(entity[0].getRequestModel(), modelFactory.getService().doProcess(entity[0]))};
-            if (responseObj[0].getResponseObject() == null){
-                return STILL_IN_WORK;
-            } else {
-                beforeResponseSteps.forEach((step) -> responseObj[0] = step.executeStep(responseObj[0]));
-                return responseObj[0].getResponseObject();
+            try {
+                workSteps.forEach((step) -> entity[0] = step.executeStep(entity[0]));
+                final ResponseObj[] responseObj = {new ResponseObj(entity[0], modelFactory.getService().doProcess(entity[0]))};
+                if (responseObj[0].getResponseObject() == null) {
+                    return STILL_IN_WORK;
+                } else {
+                    beforeResponseSteps.forEach((step) -> responseObj[0] = step.executeStep(responseObj[0]));
+                    return responseObj[0].getResponseObject();
+                }
+            } catch (Exception e){
+                TransactionContext transactionContexts = entity[0].getTransactionContext();
+                if (transactionContexts != null && transactionContexts.isTransactionStart() && !transactionContexts.getTransactionStatus().isCompleted()){
+                    transactionContexts.getTransactionRollback().apply(transactionContexts.getTransactionStatus());
+                    LogUtils.error(e.getMessage(), e);
+                }
+                throw e;
             }
         }
         if (pageNotFoundException == null){
