@@ -22,7 +22,7 @@ public class ImportFileUtils {
     private void initSystemPropertyFile() throws FileNotFoundException {
         ThreadPoolResources.EXECUTOR_SERVICE.execute(() -> {
             try {
-                propertiesParameters.load(ImportFileUtils.class.getClassLoader().getResourceAsStream("conf.properties"));
+                propertiesParameters.load(ImportFileUtils.class.getClassLoader().getResourceAsStream("system/conf.properties"));
                 LogUtils.info("conf.properties has load success.");
             } catch (IOException e) {
                 LOG.error(e.getMessage(), e);

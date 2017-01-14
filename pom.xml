@@ -205,6 +205,14 @@
                             <directory>src/main/resources/mapping</directory>
                             <targetPath>WEB-INF/classes/mapping</targetPath>
                         </resource>
+                        <resource>
+                            <directory>src/main/resources/jdbc</directory>
+                            <targetPath>WEB-INF/classes/jdbc</targetPath>
+                        </resource>
+                        <resource>
+                            <directory>src/main/resources/system</directory>
+                            <targetPath>WEB-INF/classes/system</targetPath>
+                        </resource>
                     </webResources>
                 </configuration>
             </plugin>
