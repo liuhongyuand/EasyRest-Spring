@@ -13,12 +13,10 @@ public class LogUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogUtils.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
-    public static <T>T printGsonObject(final T t){
-        try {
-            return t;
-        }finally {
-            LOGGER.info(GSON.toJson(t));
-        }
+    public static String printGsonObject(final Object obj){
+        String jsonResult = GSON.toJson(obj);
+        LOGGER.info(jsonResult);
+        return jsonResult;
     }
 
     public static void info(String string){

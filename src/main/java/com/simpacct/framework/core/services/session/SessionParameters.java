@@ -5,7 +5,11 @@ package com.simpacct.framework.core.services.session;
  */
 public enum  SessionParameters {
 
-    CAPTCHA("captcha_code");
+    UserId("userId"),
+
+    CAPTCHA("captcha_code"),
+
+    ErrorCode("err_code");
 
     String parameter;
 

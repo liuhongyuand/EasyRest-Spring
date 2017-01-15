@@ -8,57 +8,82 @@ import com.simpacct.framework.core.utils.StringUtils;
  */
 public class ErrorEntity {
 
-    private String Code;
-    private String Message;
-    private String ExceptionType;
-    private String URL;
+    private String code;
+    private String message;
+    private ErrorInfo data = new ErrorInfo();
 
-    public ErrorEntity(String Code, String Message, String URL){
-        this.setCode(Code).setMessage(Message).setURL(URL).setExceptionType("Server Error");
+    public ErrorEntity(String code, String message, String URL){
+        this.setCode(code).setMessage(message).setURL(URL).setExceptionType("Server Error");
     }
 
-    public ErrorEntity(String Code, String Message, String URL, Exception e){
-        this.setCode(StringUtils.replaceNull(Code)).setMessage(StringUtils.replaceNull(Message)).setURL(StringUtils.replaceNull(URL)).setExceptionType(e.getClass().getSimpleName());
+    public ErrorEntity(String code, String message, String URL, Exception e){
+        this.setCode(code).setMessage(StringUtils.replaceNull(message)).setURL(StringUtils.replaceNull(URL)).setExceptionType(e.getClass().getSimpleName());
     }
 
     public String getCode() {
-        return Code;
+        return code;
     }
 
     public ErrorEntity setCode(String code) {
-        Code = code;
+        if (StringUtils.isEmptyString(code)){
+            this.code = "-1";
+        } else {
+            this.code = code;
+        }
         return this;
     }
 
     public String getMessage() {
-        return Message;
+        return message;
     }
 
     public ErrorEntity setMessage(String message) {
-        Message = message;
+        this.message = message;
         return this;
     }
 
     public String getURL() {
-        return URL;
+        return data.getURL();
     }
 
     public ErrorEntity setURL(String URL) {
-        this.URL = URL;
+        data.setURL(URL);
         return this;
     }
 
     public String getExceptionType() {
-        return ExceptionType;
+        return data.getExceptionType();
     }
 
     public ErrorEntity setExceptionType(String exceptionType) {
-        ExceptionType = exceptionType;
+        data.setExceptionType(exceptionType);
         return this;
     }
 
     public static ErrorEntity getExceptionHideErrorInfo(String URL){
-        return new ErrorEntity("-1", "Something has wrong, please try again.", URL);
+        return new ErrorEntity("-1", "Something has wrong, please try again later.", URL);
+    }
+
+    private class ErrorInfo{
+
+        private String ExceptionType;
+        private String URL;
+
+        public String getExceptionType() {
+            return ExceptionType;
+        }
+
+        public void setExceptionType(String exceptionType) {
+            ExceptionType = exceptionType;
+        }
+
+        public String getURL() {
+            return URL;
+        }
+
+        public void setURL(String URL) {
+            this.URL = URL;
+        }
     }
 
 }
