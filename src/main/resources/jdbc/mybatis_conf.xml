@@ -14,7 +14,7 @@
 
     <!-- DAO interface in package，Spring automatically search for its class -->
     <bean id="configurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.simpacct.framework.core.dao"/>
+        <property name="basePackage" value="com.easyrest.framework.core.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     </bean>

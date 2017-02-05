@@ -210,8 +210,8 @@
                             <targetPath>WEB-INF/classes/jdbc</targetPath>
                         </resource>
                         <resource>
-                            <directory>src/main/resources/system</directory>
-                            <targetPath>WEB-INF/classes/system</targetPath>
+                            <directory>src/main/resources/i18n</directory>
+                            <targetPath>WEB-INF/classes/i18n</targetPath>
                         </resource>
                     </webResources>
                 </configuration>
