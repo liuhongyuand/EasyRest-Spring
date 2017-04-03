@@ -1,6 +1,5 @@
-package com.easyrest.framework.core.services.generateId.impl;
+package com.easyrest.framework.core.services.generateId.api;
 
-import com.easyrest.framework.core.services.generateId.api.GenerateIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

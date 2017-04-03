@@ -2,7 +2,7 @@ package com.easyrest.framework.core.services.workStep.before.fieldCheck.impl;
 
 import com.easyrest.framework.core.annotations.parameter.AllDefined;
 import com.easyrest.framework.core.annotations.parameter.NotNull;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.request.RequestModel;
 import com.easyrest.framework.core.services.workStep.AbstractWorkStep;
 import com.easyrest.framework.core.services.workStep.before.fieldCheck.api.FieldDefinedCheckStep;

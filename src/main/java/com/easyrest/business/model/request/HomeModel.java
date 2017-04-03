@@ -4,7 +4,7 @@ import com.easyrest.framework.core.annotations.method.Get;
 import com.easyrest.framework.core.annotations.method.Post;
 import com.easyrest.framework.core.annotations.parameter.AllDefined;
 import com.easyrest.framework.core.annotations.parameter.Optional;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.request.AbstractRequestModel;
 import com.easyrest.framework.exception.ConditionMissingException;
 

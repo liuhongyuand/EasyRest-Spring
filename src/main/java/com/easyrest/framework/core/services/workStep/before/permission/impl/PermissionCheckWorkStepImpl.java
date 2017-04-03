@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.services.workStep.before.permission.impl;
 
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.services.authentication.api.AuthenticateService;
 import com.easyrest.framework.core.services.workStep.AbstractWorkStep;
 import com.easyrest.framework.core.services.workStep.before.permission.api.PermissionCheckStep;

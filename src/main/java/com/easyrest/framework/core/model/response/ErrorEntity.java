@@ -1,4 +1,4 @@
-package com.easyrest.framework.core.model;
+package com.easyrest.framework.core.model.response;
 
 import com.easyrest.framework.core.utils.StringUtils;
 

@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.services.workStep.before.customized.impl;
 
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.services.workStep.AbstractWorkStep;
 import com.easyrest.framework.core.services.workStep.before.customized.api.CustomizedCheckStep;
 import org.springframework.stereotype.Service;

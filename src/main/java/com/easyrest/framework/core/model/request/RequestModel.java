@@ -1,6 +1,5 @@
 package com.easyrest.framework.core.model.request;
 
-import com.easyrest.framework.core.model.HttpEntity;
 import com.easyrest.framework.exception.ConditionMissingException;
 
 /**

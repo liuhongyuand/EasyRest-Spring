@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.services.session.api;
 
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.services.session.Session;
 
 import javax.servlet.http.HttpServletResponse;

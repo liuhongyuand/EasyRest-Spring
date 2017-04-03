@@ -2,7 +2,7 @@ package com.easyrest.framework.core.model.image.util;
 
 import com.github.cage.Cage;
 import com.github.cage.GCage;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.services.session.SessionParameters;
 import com.easyrest.framework.core.services.session.SessionSupport;
 import com.easyrest.framework.core.utils.StringUtils;

@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.services.verificationCode;
 
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.image.VerificationCode;
 import com.easyrest.framework.core.model.image.util.ImageSupport;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;

@@ -2,7 +2,7 @@ package com.easyrest.framework.core.services.workStep.before.transaction.impl;
 
 import com.easyrest.framework.core.annotations.history.HistoryRequired;
 import com.easyrest.framework.core.annotations.transaction.TransactionRequired;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.TransactionContext;
 import com.easyrest.framework.core.services.workStep.AbstractWorkStep;
 import com.easyrest.framework.core.services.workStep.before.transaction.api.TransactionPreparedStep;

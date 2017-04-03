@@ -1,11 +1,11 @@
-package com.easyrest.framework.core.model;
+package com.easyrest.framework.core.model.request;
 
-import com.google.gson.internal.LinkedHashTreeMap;
-import com.google.gson.internal.LinkedTreeMap;
 import com.easyrest.framework.configuration.GlobalParameters;
-import com.easyrest.framework.core.model.request.RequestModel;
+import com.easyrest.framework.core.model.TransactionContext;
 import com.easyrest.framework.core.services.session.Session;
 import com.easyrest.framework.core.utils.json.JsonTranslation;
+import com.google.gson.internal.LinkedHashTreeMap;
+import com.google.gson.internal.LinkedTreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

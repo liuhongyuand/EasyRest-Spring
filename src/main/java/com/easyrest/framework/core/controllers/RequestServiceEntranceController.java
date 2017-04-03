@@ -2,7 +2,7 @@ package com.easyrest.framework.core.controllers;
 
 import com.easyrest.framework.configuration.RequestPath;
 import com.easyrest.framework.configuration.SystemRestConfig;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.ModelFactory;
 import com.easyrest.framework.core.model.TransactionContext;
 import com.easyrest.framework.core.model.response.ResponseObj;

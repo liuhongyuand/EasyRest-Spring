@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.services.fileupload.api;
 
-import com.easyrest.framework.core.model.FileUpload;
+import com.easyrest.framework.core.model.file.FileUpload;
 import com.easyrest.framework.core.model.response.ResponseEntity;
 
 import java.util.List;

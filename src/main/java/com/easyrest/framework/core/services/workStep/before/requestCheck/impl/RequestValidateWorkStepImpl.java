@@ -1,7 +1,7 @@
 package com.easyrest.framework.core.services.workStep.before.requestCheck.impl;
 
 import com.easyrest.framework.core.annotations.method.RequestMethod;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.services.workStep.AbstractWorkStep;
 import com.easyrest.framework.core.services.workStep.before.requestCheck.api.RequestValidateStep;
 import com.easyrest.framework.exception.MethodNotAllowedException;

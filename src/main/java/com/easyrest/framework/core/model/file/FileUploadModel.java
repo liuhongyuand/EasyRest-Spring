@@ -4,7 +4,7 @@ import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.configuration.RequestPath;
 import com.easyrest.framework.core.annotations.method.Post;
 import com.easyrest.framework.core.annotations.parameter.SkipInject;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.request.AbstractRequestModel;
 import com.easyrest.framework.core.utils.LogUtils;
 import com.easyrest.framework.core.utils.StringUtils;

@@ -1,4 +1,4 @@
-package com.easyrest.framework.core.model;
+package com.easyrest.framework.core.model.file;
 
 import java.util.Date;
 

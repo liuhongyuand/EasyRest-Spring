@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.services.session;
 
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.services.session.impl.SessionStaticService;
 
 import java.util.HashMap;

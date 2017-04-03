@@ -1,7 +1,7 @@
 package com.easyrest.framework.core.services.session.impl;
 
-import com.easyrest.framework.core.model.HttpEntity;
-import com.easyrest.framework.core.services.generateId.impl.GenerateIdStaticService;
+import com.easyrest.framework.core.model.request.HttpEntity;
+import com.easyrest.framework.core.services.generateId.api.GenerateIdStaticService;
 import com.easyrest.framework.core.services.session.Session;
 import com.easyrest.framework.core.services.session.SessionParameters;
 import com.easyrest.framework.core.services.session.SessionSupport;

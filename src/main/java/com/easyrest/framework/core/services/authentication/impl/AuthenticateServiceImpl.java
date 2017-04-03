@@ -1,7 +1,7 @@
 package com.easyrest.framework.core.services.authentication.impl;
 
 import com.easyrest.framework.core.annotations.permission.PermissionRequired;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.request.RequestModel;
 import com.easyrest.framework.core.services.authentication.api.AuthenticateService;
 import com.easyrest.framework.easyrest.EasyRest;

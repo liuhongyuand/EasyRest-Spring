@@ -2,7 +2,7 @@ package com.easyrest.framework.exception;
 
 import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.core.controllers.SystemEntranceController;
-import com.easyrest.framework.core.model.ErrorEntity;
+import com.easyrest.framework.core.model.response.ErrorEntity;
 import com.easyrest.framework.core.model.response.ResponseEntity;
 import com.easyrest.framework.core.utils.LogUtils;
 import com.easyrest.framework.easyrest.EasyRest;

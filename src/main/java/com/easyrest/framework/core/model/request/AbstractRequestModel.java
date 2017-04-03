@@ -3,7 +3,6 @@ package com.easyrest.framework.core.model.request;
 import com.easyrest.framework.core.annotations.parameter.AllDefined;
 import com.easyrest.framework.core.annotations.parameter.NotNull;
 import com.easyrest.framework.core.annotations.parameter.Optional;
-import com.easyrest.framework.core.model.HttpEntity;
 import com.easyrest.framework.core.utils.StringUtils;
 import com.easyrest.framework.exception.ConditionMissingException;
 

@@ -2,7 +2,7 @@ package com.easyrest.framework.core.services.workStep.before.fieldInject.impl;
 
 import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.core.annotations.parameter.SkipInject;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.request.RequestModel;
 import com.easyrest.framework.core.services.workStep.AbstractWorkStep;
 import com.easyrest.framework.core.services.workStep.before.fieldInject.api.ValueInjectStep;

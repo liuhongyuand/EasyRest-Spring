@@ -1,7 +1,7 @@
 package com.easyrest.framework.core.services.fileupload;
 
-import com.easyrest.framework.core.model.FileUpload;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.file.FileUpload;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.file.FileUploadModel;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;
 import com.easyrest.framework.core.services.fileupload.util.FileSupport;

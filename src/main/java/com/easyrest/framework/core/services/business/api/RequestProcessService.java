@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.services.business.api;
 
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 
 /**
  * The interface of the controllers.

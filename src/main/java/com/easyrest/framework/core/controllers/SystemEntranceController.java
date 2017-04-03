@@ -3,7 +3,7 @@ package com.easyrest.framework.core.controllers;
 import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.configuration.RequestPath;
 import com.easyrest.framework.configuration.ResponseConfiguration;
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.image.util.ImageSupport;
 import com.easyrest.framework.core.model.response.ResponseEntity;
 import com.easyrest.framework.core.model.response.ResponseObj;

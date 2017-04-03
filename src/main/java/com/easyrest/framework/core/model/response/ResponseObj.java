@@ -1,6 +1,6 @@
 package com.easyrest.framework.core.model.response;
 
-import com.easyrest.framework.core.model.HttpEntity;
+import com.easyrest.framework.core.model.request.HttpEntity;
 
 /**
  * Created by liuhongyu.louie on 2017/1/10.
