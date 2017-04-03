@@ -1,6 +1,4 @@
-package com.easyrest.framework.core.annotations.method;
-
-import com.easyrest.framework.core.annotations.parameter.AllDefined;
+package com.easyrest.framework.core.annotations.parameter;
 
 import java.lang.annotation.*;
 

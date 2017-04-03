@@ -73,7 +73,7 @@ public class SystemEntranceController {
     @RequestMapping(value = {RequestPath.System.REQUEST_ENTRANCE}, produces = {ResponseConfiguration.JSON})
     public @ResponseBody
     Object NotFound(HttpServletRequest request, HttpServletResponse response) throws ExceptionHandler {
-        throw new ExceptionHandler(request, response, new PageNotFoundException());
+        throw new ExceptionHandler(request, response, new PageNotFoundException("The resource not found"));
     }
 
     private void rollbackConfigurations(HttpServletRequest request, HttpServletResponse response) {

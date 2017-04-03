@@ -1,7 +1,7 @@
 package com.easyrest.framework.core.controllers;
 
 import com.easyrest.framework.configuration.RequestPath;
-import com.easyrest.framework.configuration.RestConfig;
+import com.easyrest.framework.configuration.SystemRestConfig;
 import com.easyrest.framework.core.model.HttpEntity;
 import com.easyrest.framework.core.model.ModelFactory;
 import com.easyrest.framework.core.model.TransactionContext;
@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Future;
 
 /**
  * The entrance of data service.
@@ -29,44 +28,37 @@ import java.util.concurrent.Future;
 @Controller
 public class RequestServiceEntranceController{
 
-    @Autowired
-    private SystemStartupService systemStartupService;
+    private final SystemStartupService systemStartupService;
 
-    @Autowired
-    public RestConfig restConfig;
+    private final SystemRestConfig restConfig;
 
-    private static final long TIME_OUT = 1000 * 30L;
-    private static final String[] STILL_IN_WORK = new String[]{"This Interface Is Still In Developing."};
     private static final Map<String, ModelFactory> DISPATCHER_MAPPING = new HashMap<>();
     private static final Map<String, List<Class>> URL_MAPPING_METHOD = new HashMap<>();
-    private static PageNotFoundException pageNotFoundException;
     private static List<BeforeServiceStep> beforeServiceSteps;
     private static List<AfterServiceStep> afterServiceSteps;
+
+    @Autowired
+    public RequestServiceEntranceController(SystemStartupService systemStartupService, SystemRestConfig restConfig) {
+        this.systemStartupService = systemStartupService;
+        this.restConfig = restConfig;
+    }
 
     ResponseObj requestDispatcher(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String requestPath = request.getRequestURI().replace(RequestPath.System.SystemName, "");
         if (DISPATCHER_MAPPING.containsKey(requestPath)){
-            Future<ResponseObj> responseObjFuture = null;
             ModelFactory modelFactory = DISPATCHER_MAPPING.get(requestPath);
             LogUtils.info("Start process request: " + requestPath, this.getClass());
             final HttpEntity[] entity = {new HttpEntity(request, response, modelFactory.createModel(), URL_MAPPING_METHOD.get(requestPath))};
             try {
                 beforeServiceSteps.forEach((step) -> entity[0] = step.executeStep(entity[0]));
-//                responseObjFuture = ThreadPoolResources.EXECUTOR_SERVICE.submit(() -> new ResponseObj(entity[0], modelFactory.getService().doProcess(entity[0])));
-                // TODO: 2017/1/17 lot of things to do{
-                //      Many things that can do at the same time
-                // }
                 final ResponseObj[] responseObj = {new ResponseObj(entity[0], modelFactory.getService().doProcess(entity[0]))};
-                if (responseObj[0].getResponseObject() == null) {
-                    return new ResponseObj(entity[0], STILL_IN_WORK);
-                } else {
+                if (responseObj[0].getResponseObject() != null) {
                     afterServiceSteps.forEach((step) -> responseObj[0] = step.executeStep(responseObj[0]));
                     return responseObj[0];
+                } else {
+                    throw new PageNotFoundException("The result is null");
                 }
             } catch (Exception e){
-                if (responseObjFuture != null && !responseObjFuture.isCancelled()){
-                    responseObjFuture.cancel(true);
-                }
                 TransactionContext transactionContexts = entity[0].getTransactionContext();
                 if (transactionContexts != null && transactionContexts.isTransactionStart() && !transactionContexts.getTransactionStatus().isCompleted()){
                     transactionContexts.getTransactionRollback().apply(transactionContexts.getTransactionStatus());
@@ -75,10 +67,7 @@ public class RequestServiceEntranceController{
                 throw e;
             }
         }
-        if (pageNotFoundException == null){
-            pageNotFoundException = PageNotFoundException.getException();
-        }
-        throw pageNotFoundException;
+        throw PageNotFoundException.getException("The resource not found");
     }
 
     @PostConstruct

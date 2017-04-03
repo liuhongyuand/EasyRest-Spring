@@ -6,41 +6,7 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="com.easyrest">
-        <context:exclude-filter type="annotation" expression="com.easyrest.framework.core.annotations.method.AutoInject"/>
+        <context:exclude-filter type="annotation" expression="com.easyrest.framework.core.annotations.parameter.AutoInject"/>
     </context:component-scan>
-    <!--<context:property-placeholder location="classpath:jdbc/jdbc.properties"/>-->
     <context:annotation-config/>
-
-    <!--<import resource="jdbc/druid_conf.properties.xml"/>-->
-
-    <!--<bean id="requestPreparedStep" class="com.easyrest.framework.core.services.workStep.impl.RequestPreparedStep" />-->
-    <!--<bean id="requestValidateWorkStep" class="com.easyrest.framework.core.services.workStep.impl.RequestValidateWorkStep" />-->
-    <!--<bean id="valueInjectWorkStep" class="com.easyrest.framework.core.services.workStep.impl.ValueInjectWorkStep" />-->
-    <!--<bean id="permissionCheckWorkStep" class="com.easyrest.framework.core.services.workStep.impl.PermissionCheckWorkStep" />-->
-    <!--<bean id="customizedCheckStep" class="com.easyrest.framework.core.services.workStep.impl.CustomizedCheckStep" />-->
-    <!--<bean id="fieldDefinedCheckWorkStep" class="com.easyrest.framework.core.services.workStep.impl.FieldDefinedCheckWorkStep" />-->
-    <!--<bean id="transactionProcessStep" class="com.easyrest.framework.core.services.workStep.impl.TransactionProcessStep" />-->
-    <!--<bean id="historyRecordStep" class="com.easyrest.framework.core.services.workStep.impl.HistoryRecordStep" />-->
-    <!--<bean id="transactionCommitStep" class="com.easyrest.framework.core.services.workStep.impl.TransactionCommitStep" />-->
-
-    <!--<bean id="requestDispatcher" class="com.easyrest.framework.core.controllers.RequestServiceEntranceController" init-method="initEnvironments">-->
-        <!--<property name="workSteps">-->
-            <!--<list>-->
-                <!--<ref bean="requestPreparedStep"/>-->
-                <!--<ref bean="requestValidateWorkStep"/>-->
-                <!--<ref bean="valueInjectWorkStep"/>-->
-                <!--<ref bean="permissionCheckWorkStep"/>-->
-                <!--<ref bean="fieldDefinedCheckWorkStep"/>-->
-                <!--<ref bean="customizedCheckStep"/>-->
-                <!--&lt;!&ndash;<ref bean="transactionProcessStep" />&ndash;&gt;-->
-            <!--</list>-->
-        <!--</property>-->
-        <!--<property name="beforeResponseSteps">-->
-        <!--<list>-->
-            <!--<ref bean="historyRecordStep"/>-->
-            <!--&lt;!&ndash;<ref bean="transactionCommitStep" />&ndash;&gt;-->
-        <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-    <!--<bean id="historyService" class="com.easyrest.framework.core.services.history.impl.HistoryServiceImpl"/>-->
 </beans>

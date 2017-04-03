@@ -5,6 +5,7 @@ import com.easyrest.framework.core.controllers.SystemEntranceController;
 import com.easyrest.framework.core.model.ErrorEntity;
 import com.easyrest.framework.core.model.response.ResponseEntity;
 import com.easyrest.framework.core.utils.LogUtils;
+import com.easyrest.framework.easyrest.EasyRest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,6 +26,9 @@ public class ExceptionHandler extends Exception {
     @org.springframework.web.bind.annotation.ExceptionHandler(ExceptionHandler.class)
     public @ResponseBody
     Object responseErrorPage(ExceptionHandler exception){
+        if (EasyRest.getExceptionBindingService() != null){
+            EasyRest.getExceptionBindingService().exception(exception.request, exception.response, exception.e);
+        }
         return LogUtils.printGsonObject(getReturnExceptionInfo(exception));
     }
 

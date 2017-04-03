@@ -4,10 +4,14 @@ package com.easyrest.framework.exception;
  * Page not found exception.
  * Created by liuhongyu.louie on 2016/10/1.
  */
-public class PageNotFoundException extends NullPointerException {
+public class PageNotFoundException extends EasyRestException {
 
-    public static PageNotFoundException getException(){
-        return new PageNotFoundException();
+    public PageNotFoundException(String message) {
+        super(message);
+    }
+
+    public static PageNotFoundException getException(String message){
+        return new PageNotFoundException(message);
     }
 
 }

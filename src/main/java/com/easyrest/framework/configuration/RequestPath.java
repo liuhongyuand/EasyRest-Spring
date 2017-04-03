@@ -1,5 +1,7 @@
 package com.easyrest.framework.configuration;
 
+import com.easyrest.framework.easyrest.EasyRest;
+
 import java.util.LinkedList;
 
 /**
@@ -9,19 +11,14 @@ public class RequestPath {
 
     private static final SkipList<String> SKIP_LIST = new SkipList<>();
 
-    public class System {
-        public static final String SystemName = "/Simpacct";
+    public static class System {
+        public static final String SystemName = "/" + EasyRest.getSystemName();
         public static final String REST = "/rest";
         public static final String REQUEST_ENTRANCE = "/*";
         public static final String UPLOAD = "/upload";
         public static final String IMAGE = "/image";
         public static final String VERIFICATION_CODE = "/verification_code";
     }
-
-    /**
-     *  For business request rest url
-     */
-    public static final String HOME = "/home";
 
     public RequestPath(){
         SKIP_LIST.addToList(System.REST)

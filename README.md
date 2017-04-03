@@ -1,16 +1,24 @@
-# Framework for REST
+# Easy Rest
+## 
 
-#### Framework: Spring, Mybatis, Druid.
+**Designed for small or medium servers and fast development.**
+![](http://dbg-object.oss-cn-shanghai.aliyuncs.com/EasyRest/EasyRest.png)
+ 
+#### Steps before service:
+ * Request attribute configuration. e.g:charset
+ * Request method validate.
+ * Parameters value inject.
+ * Permission check.
+ * Missing fields check.
+ * Customized check.(if required) 
+ * ... 
+ * Other customized step.(if required) 
+ * ...
+ * Transaction prepared.(if required) 
 
-#### Infrastructure work: 
-
-* ###### Parameters all defined setting
-* ###### Parameters not null setting
-* ###### Request method check
-* ###### Request packaged
-* ###### Missed parameters remind
-* ###### Request validate
-* ###### Permission check
-* ###### Customized condition check
-* ###### Global exception catch
-* ###### Json & Jsonp support
+#### Steps after service:
+ * History record.(if required) 
+ * ...
+ * Other customized step.(if required) 
+ * ...
+ * Transaction commit or rollback.(if required) 

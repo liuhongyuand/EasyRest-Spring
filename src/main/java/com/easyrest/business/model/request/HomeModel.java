@@ -1,6 +1,5 @@
 package com.easyrest.business.model.request;
 
-import com.easyrest.framework.configuration.RequestPath;
 import com.easyrest.framework.core.annotations.method.Get;
 import com.easyrest.framework.core.annotations.method.Post;
 import com.easyrest.framework.core.annotations.parameter.AllDefined;
@@ -12,8 +11,8 @@ import com.easyrest.framework.exception.ConditionMissingException;
 /**
  * Created by liuhongyu.louie on 2016/12/27.
  */
-@Post({RequestPath.HOME})
-@Get({RequestPath.HOME})
+@Post({"/home"})
+@Get({"/home"})
 //@TransactionRequired
 //@HistoryRequired({"message"})
 @AllDefined

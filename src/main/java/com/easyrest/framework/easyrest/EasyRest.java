@@ -2,9 +2,10 @@ package com.easyrest.framework.easyrest;
 
 import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.configuration.RequestPath;
-import com.easyrest.framework.configuration.RestConfig;
+import com.easyrest.framework.configuration.SystemRestConfig;
 import com.easyrest.framework.core.services.authentication.api.AuthenticateBindingService;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;
+import com.easyrest.framework.core.services.exception.api.ExceptionBindingService;
 import com.easyrest.framework.core.services.fileupload.api.FileUploadBindingService;
 import com.easyrest.framework.core.services.history.api.HistoryBindingService;
 import com.easyrest.framework.exception.ConditionMissingException;
@@ -13,6 +14,8 @@ import com.easyrest.framework.exception.ConditionMissingException;
  * Created by liuhongyu.louie on 2017/2/5.
  */
 public class EasyRest {
+
+    private static String systemName = "/EasyRest";
 
     private static String crossAllow = "*";
 
@@ -23,6 +26,13 @@ public class EasyRest {
     private static FileUploadBindingService fileUploadBindingService;
 
     private static HistoryBindingService historyBindingService;
+
+    private static ExceptionBindingService exceptionBindingService;
+
+    public EasyRest setSystemName(String _systemName){
+        systemName = _systemName;
+        return this;
+    }
 
     public EasyRest setEnabledAutoTransaction(boolean isEnabled){
         enabledAutoTransaction = isEnabled;
@@ -35,7 +45,7 @@ public class EasyRest {
     }
 
     public EasyRest addModelService(Class model, RequestProcessService service){
-        RestConfig.addModelService(model, service);
+        SystemRestConfig.addModelService(model, service);
         return this;
     }
 
@@ -60,6 +70,11 @@ public class EasyRest {
         return this;
     }
 
+    public EasyRest bindExceptionService(ExceptionBindingService _exceptionBindingService){
+        exceptionBindingService = _exceptionBindingService;
+        return this;
+    }
+
     public static AuthenticateBindingService getAuthenticateBindingService(){
         if (authenticateBindingService == null){
             throw new ConditionMissingException("AuthenticateBindingService can not be null.");
@@ -79,6 +94,14 @@ public class EasyRest {
             throw new ConditionMissingException("HistoryBindingService can not be null.");
         }
         return historyBindingService;
+    }
+
+    public static ExceptionBindingService getExceptionBindingService(){
+        return exceptionBindingService;
+    }
+
+    public static String getSystemName(){
+        return systemName;
     }
 
     public static boolean getEnabledAutoTransaction(){

@@ -6,8 +6,6 @@ import com.easyrest.framework.core.model.image.VerificationCode;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;
 import com.easyrest.framework.core.services.fileupload.FileUploadServiceImpl;
 import com.easyrest.framework.core.services.verificationCode.VerificationCodeImpl;
-import com.easyrest.business.model.request.HomeModel;
-import com.easyrest.business.services.business.rest.HomeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,7 +18,7 @@ import java.util.Set;
  * Created by liuhongyu.louie on 2016/9/29.
  */
 @Configuration
-public class RestConfig {
+public class SystemRestConfig {
 
     private final static Set<ModelFactory> REST_SET = new HashSet<>();
 

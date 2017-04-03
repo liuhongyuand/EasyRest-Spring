@@ -1,7 +1,5 @@
 package com.easyrest.framework.core.annotations.permission;
 
-import com.easyrest.framework.core.services.authentication.common.PermissionRole;
-
 import java.lang.annotation.*;
 
 /**
@@ -11,6 +9,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface PermissionRequired {
-    PermissionRole.PermissionRequired[] role() default PermissionRole.PermissionRequired.GOD;
-    String userIdFieldName() default "";
+    String[] parameters() default {""};
 }
