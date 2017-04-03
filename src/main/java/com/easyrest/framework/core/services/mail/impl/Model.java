@@ -5,7 +5,6 @@ import java.util.Map;
 
 /**
  * Created by yu on 9/24/16.
- * 渲染的MODEL视图
  */
 public class Model {
     private final Map<String, Object> root = new HashMap<>();

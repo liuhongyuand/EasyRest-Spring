@@ -1,5 +1,6 @@
 package com.easyrest.framework.configuration;
 
+import com.easyrest.framework.easyrest.EasyRest;
 import org.springframework.http.MediaType;
 
 import java.util.AbstractMap;
@@ -13,9 +14,7 @@ public class ResponseConfiguration {
     public static final String IMAGE = MediaType.IMAGE_PNG_VALUE;
 
     public enum Header{
-        AccessControlAllowOrigin(new AbstractMap.SimpleEntry<>("Access-Control-Allow-Origin", "http://service.dbgsoftware.tech")),
-//        AccessControlAllowOrigin(new AbstractMap.SimpleEntry<>("Access-Control-Allow-Origin", "http://localhost:63342")),
-//        AccessControlAllowOrigin(new AbstractMap.SimpleEntry<>("Access-Control-Allow-Origin", "*")),
+        AccessControlAllowOrigin(new AbstractMap.SimpleEntry<>("Access-Control-Allow-Origin", EasyRest.getCrossAllow())),
         AccessControlAllowMethods(new AbstractMap.SimpleEntry<>("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT")),
         AccessControlMaxAge(new AbstractMap.SimpleEntry<>("Access-Control-Max-Age", "13600")),
         AccessControlAllowHeaders(new AbstractMap.SimpleEntry<>("Access-Control-Allow-Headers", "x-requested-with")),

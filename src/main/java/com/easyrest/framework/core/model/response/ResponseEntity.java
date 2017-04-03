@@ -70,4 +70,38 @@ public class ResponseEntity<T>  {
         }
     }
 
+    public static ResponseEntity<Boolean> buildOkResponse(){
+        ResponseEntity<Boolean> responseEntity = new ResponseEntity<>();
+        responseEntity.setData(true);
+        return responseEntity;
+    }
+
+    public static <T>ResponseEntity<T> buildOkResponse(T t){
+        ResponseEntity<T> responseEntity = new ResponseEntity<>();
+        responseEntity.setData(t);
+        return responseEntity;
+    }
+
+    public static ResponseEntity<Boolean> buildFailedResponse(){
+        ResponseEntity<Boolean> responseEntity = new ResponseEntity<>();
+        responseEntity.setData(false);
+        responseEntity.setFailed();
+        return responseEntity;
+    }
+
+    public static <T>ResponseEntity<T> buildFailedResponse(T t){
+        ResponseEntity<T> responseEntity = new ResponseEntity<>();
+        responseEntity.setData(t);
+        responseEntity.setFailed();
+        return responseEntity;
+    }
+
+    public static <T>ResponseEntity<T> buildCustomizeResponse(int code, String message, T t){
+        ResponseEntity<T> responseEntity = new ResponseEntity<>();
+        responseEntity.setData(t);
+        responseEntity.setCode(String.valueOf(code));
+        responseEntity.setMessage(message);
+        return responseEntity;
+    }
+
 }

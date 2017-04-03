@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class Startup implements SystemStartupService {
 
-    private EasyRest easyRest = new EasyRest();
+    private static final EasyRest EASY_REST = new EasyRest();
 
     @Autowired
     private HomeServiceImpl homeService;
@@ -24,8 +24,9 @@ public class Startup implements SystemStartupService {
 
     @Override
     public void init(){
-        easyRest.addModelService(HomeModel.class, homeService);
-        easyRest.bindFileUploadService("C:/Users/liuhongyu.louie/Desktop/", fileUploadBindingService);
+        EASY_REST.setEnabledAutoTransaction(false);
+        EASY_REST.addModelService(HomeModel.class, homeService);
+        EASY_REST.bindFileUploadService("C:/Users/liuhongyu.louie/Desktop/", fileUploadBindingService);
     }
 
 }

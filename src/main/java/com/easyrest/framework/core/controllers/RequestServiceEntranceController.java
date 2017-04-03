@@ -6,9 +6,9 @@ import com.easyrest.framework.core.model.HttpEntity;
 import com.easyrest.framework.core.model.ModelFactory;
 import com.easyrest.framework.core.model.TransactionContext;
 import com.easyrest.framework.core.model.response.ResponseObj;
-import com.easyrest.framework.core.services.workStep.api.WorkStep;
+import com.easyrest.framework.core.services.workStep.api.AfterServiceStep;
+import com.easyrest.framework.core.services.workStep.api.BeforeServiceStep;
 import com.easyrest.framework.core.utils.LogUtils;
-import com.easyrest.framework.core.utils.ThreadPoolResources;
 import com.easyrest.framework.easyrest.SystemStartupService;
 import com.easyrest.framework.exception.PageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The entrance of data service.
@@ -41,8 +40,8 @@ public class RequestServiceEntranceController{
     private static final Map<String, ModelFactory> DISPATCHER_MAPPING = new HashMap<>();
     private static final Map<String, List<Class>> URL_MAPPING_METHOD = new HashMap<>();
     private static PageNotFoundException pageNotFoundException;
-    private List<WorkStep> workSteps;
-    private List<WorkStep> beforeResponseSteps;
+    private static List<BeforeServiceStep> beforeServiceSteps;
+    private static List<AfterServiceStep> afterServiceSteps;
 
     ResponseObj requestDispatcher(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String requestPath = request.getRequestURI().replace(RequestPath.System.SystemName, "");
@@ -52,16 +51,16 @@ public class RequestServiceEntranceController{
             LogUtils.info("Start process request: " + requestPath, this.getClass());
             final HttpEntity[] entity = {new HttpEntity(request, response, modelFactory.createModel(), URL_MAPPING_METHOD.get(requestPath))};
             try {
-                workSteps.forEach((step) -> entity[0] = step.executeStep(entity[0]));
-                responseObjFuture = ThreadPoolResources.EXECUTOR_SERVICE.submit(() -> new ResponseObj(entity[0], modelFactory.getService().doProcess(entity[0])));
-                //// TODO: 2017/1/17 lot of things to do{
+                beforeServiceSteps.forEach((step) -> entity[0] = step.executeStep(entity[0]));
+//                responseObjFuture = ThreadPoolResources.EXECUTOR_SERVICE.submit(() -> new ResponseObj(entity[0], modelFactory.getService().doProcess(entity[0])));
+                // TODO: 2017/1/17 lot of things to do{
                 //      Many things that can do at the same time
                 // }
-                final ResponseObj[] responseObj = {responseObjFuture.get(TIME_OUT, TimeUnit.MILLISECONDS)};
+                final ResponseObj[] responseObj = {new ResponseObj(entity[0], modelFactory.getService().doProcess(entity[0]))};
                 if (responseObj[0].getResponseObject() == null) {
                     return new ResponseObj(entity[0], STILL_IN_WORK);
                 } else {
-                    beforeResponseSteps.forEach((step) -> responseObj[0] = step.executeStep(responseObj[0]));
+                    afterServiceSteps.forEach((step) -> responseObj[0] = step.executeStep(responseObj[0]));
                     return responseObj[0];
                 }
             } catch (Exception e){
@@ -93,11 +92,11 @@ public class RequestServiceEntranceController{
         }));
     }
 
-    public void setWorkSteps(List<WorkStep> workSteps) {
-        this.workSteps = workSteps;
+    public static void setBeforeServiceSteps(List<BeforeServiceStep> _beforeServiceSteps) {
+        beforeServiceSteps = _beforeServiceSteps;
     }
 
-    public void setBeforeResponseSteps(List<WorkStep> beforeResponseSteps) {
-        this.beforeResponseSteps = beforeResponseSteps;
+    public static void setAfterServiceSteps(List<AfterServiceStep> _afterServiceSteps) {
+        afterServiceSteps = _afterServiceSteps;
     }
 }

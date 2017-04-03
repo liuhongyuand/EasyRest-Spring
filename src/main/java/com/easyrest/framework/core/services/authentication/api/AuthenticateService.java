@@ -9,6 +9,4 @@ public interface AuthenticateService {
 
     boolean authenticate(HttpEntity httpEntity);
 
-    boolean getSession(HttpEntity httpEntity);
-
 }

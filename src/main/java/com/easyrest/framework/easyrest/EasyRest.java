@@ -7,7 +7,6 @@ import com.easyrest.framework.core.services.authentication.api.AuthenticateBindi
 import com.easyrest.framework.core.services.business.api.RequestProcessService;
 import com.easyrest.framework.core.services.fileupload.api.FileUploadBindingService;
 import com.easyrest.framework.core.services.history.api.HistoryBindingService;
-import com.easyrest.framework.core.services.i18n.api.I18NIdProviderService;
 import com.easyrest.framework.exception.ConditionMissingException;
 
 /**
@@ -15,13 +14,25 @@ import com.easyrest.framework.exception.ConditionMissingException;
  */
 public class EasyRest {
 
+    private static String crossAllow = "*";
+
+    private static boolean enabledAutoTransaction = false;
+
     private static AuthenticateBindingService authenticateBindingService;
 
     private static FileUploadBindingService fileUploadBindingService;
 
-    private static I18NIdProviderService i18NIdProviderService;
-
     private static HistoryBindingService historyBindingService;
+
+    public EasyRest setEnabledAutoTransaction(boolean isEnabled){
+        enabledAutoTransaction = isEnabled;
+        return this;
+    }
+
+    public EasyRest setCrossAllow(String host){
+        crossAllow = host;
+        return this;
+    }
 
     public EasyRest addModelService(Class model, RequestProcessService service){
         RestConfig.addModelService(model, service);
@@ -44,11 +55,6 @@ public class EasyRest {
         return this;
     }
 
-    public EasyRest setIdProviderForI18N(I18NIdProviderService _i18NIdProviderService){
-        i18NIdProviderService = _i18NIdProviderService;
-        return this;
-    }
-
     public EasyRest bindHistoryService(HistoryBindingService _historyBindingService){
         historyBindingService = _historyBindingService;
         return this;
@@ -68,18 +74,19 @@ public class EasyRest {
         return fileUploadBindingService;
     }
 
-    public static I18NIdProviderService getI18NProvider(){
-        if (i18NIdProviderService == null){
-            throw new ConditionMissingException("I18NIdProviderService can not be null.");
-        }
-        return i18NIdProviderService;
-    }
-
     public static HistoryBindingService getHistoryBindingService(){
         if (historyBindingService == null){
             throw new ConditionMissingException("HistoryBindingService can not be null.");
         }
         return historyBindingService;
+    }
+
+    public static boolean getEnabledAutoTransaction(){
+        return enabledAutoTransaction;
+    }
+
+    public static String getCrossAllow(){
+        return crossAllow;
     }
 
 }

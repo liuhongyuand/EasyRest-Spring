@@ -22,4 +22,9 @@
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
     </bean>
 
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 </beans>

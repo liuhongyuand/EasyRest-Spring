@@ -1,24 +1,27 @@
 package com.easyrest.business.model.request;
 
 import com.easyrest.framework.configuration.RequestPath;
-import com.easyrest.framework.core.annotations.history.HistoryRequired;
 import com.easyrest.framework.core.annotations.method.Get;
 import com.easyrest.framework.core.annotations.method.Post;
-import com.easyrest.framework.core.annotations.parameter.NotNull;
+import com.easyrest.framework.core.annotations.parameter.AllDefined;
+import com.easyrest.framework.core.annotations.parameter.Optional;
 import com.easyrest.framework.core.model.HttpEntity;
-import com.easyrest.framework.exception.ConditionMissingException;
 import com.easyrest.framework.core.model.request.AbstractRequestModel;
+import com.easyrest.framework.exception.ConditionMissingException;
 
 /**
  * Created by liuhongyu.louie on 2016/12/27.
  */
 @Post({RequestPath.HOME})
 @Get({RequestPath.HOME})
+//@TransactionRequired
+//@HistoryRequired({"message"})
+@AllDefined
 public class HomeModel extends AbstractRequestModel {
 
-    private @NotNull String code;
+    private @Optional String code;
     private String url;
-    private @NotNull String message;
+    private String message;
 
     public String getCode() {
         return code;

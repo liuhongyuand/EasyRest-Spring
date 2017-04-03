@@ -15,8 +15,6 @@ public class FileUploadBindingServiceImpl implements FileUploadBindingService {
 
     @Override
     public ResponseEntity<?> customizeServiceImpl(List<FileUpload> fileUploadList) {
-        ResponseEntity<List<FileUpload>> responseEntity = new ResponseEntity<>();
-        responseEntity.setData(fileUploadList);
-        return responseEntity;
+        return ResponseEntity.buildOkResponse(fileUploadList);
     }
 }

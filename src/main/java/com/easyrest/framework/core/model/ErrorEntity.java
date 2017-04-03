@@ -1,6 +1,5 @@
 package com.easyrest.framework.core.model;
 
-import com.easyrest.framework.core.services.i18n.impl.I18NStaticService;
 import com.easyrest.framework.core.utils.StringUtils;
 
 /**
@@ -13,7 +12,7 @@ public class ErrorEntity {
     private String message;
     private ErrorInfo data = new ErrorInfo();
 
-    public ErrorEntity(String code, String message, String URL){
+    private ErrorEntity(String code, String message, String URL){
         this.setCode(code).setMessage(message).setURL(URL).setExceptionType("Server Error");
     }
 
@@ -25,7 +24,7 @@ public class ErrorEntity {
         return code;
     }
 
-    public ErrorEntity setCode(String code) {
+    private ErrorEntity setCode(String code) {
         if (StringUtils.isEmptyString(code)){
             this.code = "-1";
         } else {
@@ -38,7 +37,7 @@ public class ErrorEntity {
         return message;
     }
 
-    public ErrorEntity setMessage(String message) {
+    private ErrorEntity setMessage(String message) {
         this.message = message;
         return this;
     }
@@ -47,7 +46,7 @@ public class ErrorEntity {
         return data.getURL();
     }
 
-    public ErrorEntity setURL(String URL) {
+    private ErrorEntity setURL(String URL) {
         data.setURL(URL);
         return this;
     }
@@ -56,13 +55,13 @@ public class ErrorEntity {
         return data.getExceptionType();
     }
 
-    public ErrorEntity setExceptionType(String exceptionType) {
+    private ErrorEntity setExceptionType(String exceptionType) {
         data.setExceptionType(exceptionType);
         return this;
     }
 
     public static ErrorEntity getExceptionHideErrorInfo(String URL){
-        return new ErrorEntity("-1", I18NStaticService.getMessage("unknown.error"), URL);
+        return new ErrorEntity("-1", "server error.", URL);
     }
 
     private class ErrorInfo{
@@ -70,19 +69,19 @@ public class ErrorEntity {
         private String ExceptionType;
         private String URL;
 
-        public String getExceptionType() {
+        String getExceptionType() {
             return ExceptionType;
         }
 
-        public void setExceptionType(String exceptionType) {
+        void setExceptionType(String exceptionType) {
             ExceptionType = exceptionType;
         }
 
-        public String getURL() {
+        String getURL() {
             return URL;
         }
 
-        public void setURL(String URL) {
+        void setURL(String URL) {
             this.URL = URL;
         }
     }

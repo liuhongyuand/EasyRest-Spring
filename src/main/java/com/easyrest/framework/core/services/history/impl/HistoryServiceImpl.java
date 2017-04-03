@@ -2,10 +2,12 @@ package com.easyrest.framework.core.services.history.impl;
 
 import com.easyrest.framework.core.services.history.api.HistoryService;
 import com.easyrest.framework.easyrest.EasyRest;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by liuhongyu.louie on 2017/1/10.
  */
+@Service
 public class HistoryServiceImpl implements HistoryService {
 
     private static final String DEFAULT_USER = "Not a special user";

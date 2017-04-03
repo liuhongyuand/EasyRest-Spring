@@ -9,4 +9,6 @@ public interface AuthenticateBindingService {
 
     boolean checkAuthenticate(HttpEntity httpEntity);
 
+    String errorMessage();
+
 }

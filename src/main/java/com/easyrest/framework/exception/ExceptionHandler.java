@@ -4,7 +4,6 @@ import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.core.controllers.SystemEntranceController;
 import com.easyrest.framework.core.model.ErrorEntity;
 import com.easyrest.framework.core.model.response.ResponseEntity;
-import com.easyrest.framework.core.services.i18n.impl.I18NStaticService;
 import com.easyrest.framework.core.utils.LogUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +53,7 @@ public class ExceptionHandler extends Exception {
     }
 
     private Object responseErrorPage(){
-        return new ErrorEntity("", I18NStaticService.getMessage("resource.not.found"), request.getRequestURL().toString(), e);
+        return new ErrorEntity("", "resource not found.", request.getRequestURL().toString(), e);
     }
 
     private Object responseServerError(){
@@ -62,7 +61,7 @@ public class ExceptionHandler extends Exception {
     }
 
     private ResponseEntity responseParameterError(){
-        RESPONSE_ENTITY.setFailed(String.format(I18NStaticService.getMessage("parameter.not.defined"), e.getMessage()));
+        RESPONSE_ENTITY.setFailed(String.format("%s not defined.", e.getMessage()));
         return RESPONSE_ENTITY;
     }
 
