@@ -2,7 +2,7 @@
 ## 
 
 **Designed for small or medium servers and fast development.**
-![](https://www.dbgsoftware.tech/EasyRest/EasyRest.png)
+![](https://www.dbgsoftware.tech/EasyRest/EasyRest-info.png)
  
 #### Steps before service:
  * Request attribute configuration. e.g:charset
