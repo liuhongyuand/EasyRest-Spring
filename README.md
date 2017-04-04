@@ -22,3 +22,11 @@
  * Other customized step.(if required) 
  * ...
  * Transaction commit or rollback.(if required) 
+
+#### Sync request:
+ * Return with the result.
+ 
+#### Async request:
+ * Submit to job pool and return jobId.
+ * Query job status.
+ * Get job result.

@@ -1,11 +1,12 @@
 package com.easyrest.business.model.request;
 
+import com.easyrest.framework.core.annotations.async.AsyncRequest;
 import com.easyrest.framework.core.annotations.method.Get;
 import com.easyrest.framework.core.annotations.method.Post;
 import com.easyrest.framework.core.annotations.parameter.AllDefined;
 import com.easyrest.framework.core.annotations.parameter.Optional;
-import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.request.AbstractRequestModel;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.exception.ConditionMissingException;
 
 /**
@@ -15,6 +16,7 @@ import com.easyrest.framework.exception.ConditionMissingException;
 @Get({"/home"})
 //@TransactionRequired
 //@HistoryRequired({"message"})
+@AsyncRequest()
 @AllDefined
 public class HomeModel extends AbstractRequestModel {
 
