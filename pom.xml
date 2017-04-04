@@ -26,6 +26,7 @@
         <cage.version>1.0</cage.version>
         <freemaker.version>2.3.25-incubating</freemaker.version>
         <java.sun.mail.version>1.5.6</java.sun.mail.version>
+        <reflection.version>0.9.11</reflection.version>
     </properties>
     <dependencies>
         <dependency>
@@ -117,6 +118,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>${commons-email.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>${reflection.version}</version>
         </dependency>
 
     </dependencies>

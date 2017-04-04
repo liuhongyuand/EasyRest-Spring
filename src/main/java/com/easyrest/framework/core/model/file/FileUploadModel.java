@@ -2,10 +2,12 @@ package com.easyrest.framework.core.model.file;
 
 import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.configuration.RequestPath;
+import com.easyrest.framework.core.annotations.bean.BindService;
 import com.easyrest.framework.core.annotations.method.Post;
 import com.easyrest.framework.core.annotations.parameter.SkipInject;
 import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.request.AbstractRequestModel;
+import com.easyrest.framework.core.services.fileupload.FileUploadServiceImpl;
 import com.easyrest.framework.core.utils.LogUtils;
 import com.easyrest.framework.core.utils.StringUtils;
 import com.easyrest.framework.easyrest.EasyRest;
@@ -31,6 +33,7 @@ import java.util.Map;
  */
 @Post({RequestPath.System.UPLOAD})
 @SkipInject
+@BindService(FileUploadServiceImpl.class)
 public class FileUploadModel extends AbstractRequestModel {
 
     private List<FileUploaded> fileList = new ArrayList<>();

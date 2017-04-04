@@ -21,7 +21,6 @@ import com.easyrest.framework.exception.PageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -35,22 +34,22 @@ import java.util.Map;
 @Controller
 public class RequestServiceEntranceController{
 
-    private final SystemStartupService systemStartupService;
+    private static SystemStartupService systemStartupService;
 
-    private final SystemRestConfig restConfig;
+    private static SystemRestConfig restConfig;
 
     private static final Map<String, ModelFactory> DISPATCHER_MAPPING = new HashMap<>();
     private static final Map<String, List<Class>> URL_MAPPING_METHOD = new HashMap<>();
     private static List<BeforeServiceStep> beforeServiceSteps;
     private static List<AfterServiceStep> afterServiceSteps;
     private static final SchedulerProcessor PROCESSOR = new JobPool();
-    private final SchedulerService schedulerService;
+    private static SchedulerService schedulerService;
 
     @Autowired
     public RequestServiceEntranceController(SystemStartupService systemStartupService, SystemRestConfig restConfig, SchedulerService schedulerService) {
-        this.systemStartupService = systemStartupService;
-        this.restConfig = restConfig;
-        this.schedulerService = schedulerService;
+        RequestServiceEntranceController.systemStartupService = systemStartupService;
+        RequestServiceEntranceController.restConfig = restConfig;
+        RequestServiceEntranceController.schedulerService = schedulerService;
     }
 
     ResponseObj requestDispatcher(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -88,8 +87,16 @@ public class RequestServiceEntranceController{
         }
     }
 
-    @PostConstruct
-    private void initEnvironments(){
+    public static void setBeforeServiceSteps(List<BeforeServiceStep> _beforeServiceSteps) {
+        beforeServiceSteps = _beforeServiceSteps;
+    }
+
+    public static void setAfterServiceSteps(List<AfterServiceStep> _afterServiceSteps) {
+        afterServiceSteps = _afterServiceSteps;
+        initEnvironments();
+    }
+
+    private static void initEnvironments(){
         systemStartupService.init();
         restConfig.initAndGetMapping().forEach((rest) -> rest.getURLMapping().forEach((k, v) -> {
             if (RequestPath.isOpenInterface(k)) {
@@ -98,13 +105,5 @@ public class RequestServiceEntranceController{
             }
         }));
         schedulerService.bindScheduler(0, 1000 * 60 * 10, PROCESSOR, false);
-    }
-
-    public static void setBeforeServiceSteps(List<BeforeServiceStep> _beforeServiceSteps) {
-        beforeServiceSteps = _beforeServiceSteps;
-    }
-
-    public static void setAfterServiceSteps(List<AfterServiceStep> _afterServiceSteps) {
-        afterServiceSteps = _afterServiceSteps;
     }
 }

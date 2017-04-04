@@ -30,6 +30,10 @@ public class BeanOperationUtils implements ApplicationContextAware {
         return defaultListableBeanFactory.getBean(beanName, beanClass);
     }
 
+    public static <T>T getBean(Class<T> beanClass){
+        return defaultListableBeanFactory.getBean(beanClass);
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         bean = new GenericBeanDefinition();

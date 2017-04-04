@@ -9,6 +9,9 @@ import com.easyrest.framework.core.services.exception.api.ExceptionBindingServic
 import com.easyrest.framework.core.services.fileupload.api.FileUploadBindingService;
 import com.easyrest.framework.core.services.history.api.HistoryBindingService;
 import com.easyrest.framework.exception.ConditionMissingException;
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * Created by liuhongyu.louie on 2017/2/5.
@@ -18,6 +21,8 @@ public class EasyRest {
     private static String systemName = "/EasyRest";
 
     private static String crossAllow = "*";
+
+    private static List<String> rootPackageName = Lists.newArrayList("com.easyrest");
 
     private static boolean enabledAutoTransaction = false;
 
@@ -31,6 +36,13 @@ public class EasyRest {
 
     public EasyRest setSystemName(String _systemName){
         systemName = _systemName;
+        return this;
+    }
+
+    public EasyRest addRootPackageName(String _rootPackageName){
+        if (!rootPackageName.contains(_rootPackageName)) {
+            rootPackageName.add(_rootPackageName);
+        }
         return this;
     }
 
@@ -102,6 +114,10 @@ public class EasyRest {
 
     public static String getSystemName(){
         return systemName;
+    }
+
+    public static List<String> getRootPackageName() {
+        return rootPackageName;
     }
 
     public static boolean getEnabledAutoTransaction(){

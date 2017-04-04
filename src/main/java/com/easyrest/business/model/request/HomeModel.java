@@ -1,6 +1,8 @@
 package com.easyrest.business.model.request;
 
+import com.easyrest.business.services.business.rest.HomeServiceImpl;
 import com.easyrest.framework.core.annotations.async.AsyncRequest;
+import com.easyrest.framework.core.annotations.bean.BindService;
 import com.easyrest.framework.core.annotations.method.Get;
 import com.easyrest.framework.core.annotations.method.Post;
 import com.easyrest.framework.core.annotations.parameter.AllDefined;
@@ -16,8 +18,9 @@ import com.easyrest.framework.exception.ConditionMissingException;
 @Get({"/home"})
 //@TransactionRequired
 //@HistoryRequired({"message"})
-@AsyncRequest()
+@AsyncRequest
 @AllDefined
+@BindService(HomeServiceImpl.class)
 public class HomeModel extends AbstractRequestModel {
 
     private @Optional String code;

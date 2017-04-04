@@ -1,19 +1,21 @@
 package com.easyrest.framework.configuration;
 
+import com.easyrest.framework.core.annotations.bean.BindService;
 import com.easyrest.framework.core.model.ModelFactory;
-import com.easyrest.framework.core.model.file.FileUploadModel;
-import com.easyrest.framework.core.model.image.VerificationCode;
-import com.easyrest.framework.core.model.job.GetJobResultModel;
-import com.easyrest.framework.core.model.job.JobStatusQueryModel;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;
-import com.easyrest.framework.core.services.fileupload.FileUploadServiceImpl;
-import com.easyrest.framework.core.services.job.impl.GetJobResultServiceImpl;
-import com.easyrest.framework.core.services.job.impl.JobStatusQueryServiceImpl;
-import com.easyrest.framework.core.services.verificationCode.VerificationCodeImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.easyrest.framework.core.utils.BeanOperationUtils;
+import com.easyrest.framework.easyrest.EasyRest;
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -26,31 +28,33 @@ public class SystemRestConfig {
 
     private final static Set<ModelFactory> REST_SET = new HashSet<>();
 
-    @Autowired
-    private FileUploadServiceImpl fileUploadService;
-
-    @Autowired
-    private VerificationCodeImpl verificationCode;
-
-    @Autowired
-    private JobStatusQueryServiceImpl jobStatusQueryService;
-
-    @Autowired
-    private GetJobResultServiceImpl getJobResultService;
-
     public static void addModelService(Class model, RequestProcessService service){
         REST_SET.add(new ModelFactory(model, service));
     }
 
-    private void init(){
-        REST_SET.add(new ModelFactory(VerificationCode.class, verificationCode));
-        REST_SET.add(new ModelFactory(FileUploadModel.class, fileUploadService));
-        REST_SET.add(new ModelFactory(JobStatusQueryModel.class, jobStatusQueryService));
-        REST_SET.add(new ModelFactory(GetJobResultModel.class, getJobResultService));
+    private void injectService(){
+        List<String> filter = new LinkedList<>();
+        EasyRest.getRootPackageName().forEach((rootName) -> {
+            List<ClassLoader> classLoadersList = new LinkedList<>();
+            classLoadersList.add(ClasspathHelper.contextClassLoader());
+            classLoadersList.add(ClasspathHelper.staticClassLoader());
+            Reflections reflections = new Reflections(new ConfigurationBuilder()
+                    .setScanners(new SubTypesScanner(false), new ResourcesScanner())
+                    .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
+                    .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix(rootName))));
+            Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
+            classes.forEach((aClass -> {
+                if (aClass.isAnnotationPresent(BindService.class) && !filter.contains(aClass.getName())){
+                    filter.add(aClass.getName());
+                    BindService service = aClass.getAnnotation(BindService.class);
+                    REST_SET.add(new ModelFactory(aClass, (RequestProcessService) BeanOperationUtils.getBean(service.value())));
+                }
+            }));
+        });
     }
 
     public Set<ModelFactory> initAndGetMapping(){
-        init();
+        injectService();
         return REST_SET;
     }
 
