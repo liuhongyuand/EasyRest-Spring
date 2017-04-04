@@ -19,7 +19,10 @@ public class Startup implements SystemStartupService {
 
     @Override
     public void init(){
-        EASY_REST.setEnabledAutoTransaction(false)
+        EASY_REST
+                .setEnabledAutoTransaction(false)
+                .setCrossAllow("*")
+                .setSystemName("MyRestServer")
                 .bindFileUploadService("C:/Users/liuhongyu.louie/Desktop/", fileUploadBindingService);
     }
 
