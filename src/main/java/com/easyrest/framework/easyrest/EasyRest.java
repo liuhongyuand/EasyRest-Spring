@@ -8,6 +8,7 @@ import com.easyrest.framework.core.services.business.api.RequestProcessService;
 import com.easyrest.framework.core.services.exception.api.ExceptionBindingService;
 import com.easyrest.framework.core.services.fileupload.api.FileUploadBindingService;
 import com.easyrest.framework.core.services.history.api.HistoryBindingService;
+import com.easyrest.framework.core.services.verificationCode.CaptchaBindingService;
 import com.easyrest.framework.exception.ConditionMissingException;
 import com.google.common.collect.Lists;
 
@@ -31,6 +32,8 @@ public class EasyRest {
     private static FileUploadBindingService fileUploadBindingService;
 
     private static HistoryBindingService historyBindingService;
+
+    private static CaptchaBindingService captchaBindingService;
 
     private static ExceptionBindingService exceptionBindingService;
 
@@ -82,6 +85,11 @@ public class EasyRest {
         return this;
     }
 
+    public EasyRest bindCaptchaService(CaptchaBindingService _captchaBindingService){
+        captchaBindingService = _captchaBindingService;
+        return this;
+    }
+
     public EasyRest bindExceptionService(ExceptionBindingService _exceptionBindingService){
         exceptionBindingService = _exceptionBindingService;
         return this;
@@ -106,6 +114,13 @@ public class EasyRest {
             throw new ConditionMissingException("HistoryBindingService can not be null.");
         }
         return historyBindingService;
+    }
+
+    public static CaptchaBindingService getCaptchaBindingService(){
+        if (captchaBindingService == null){
+            throw new ConditionMissingException("CaptchaBindingService can not be null.");
+        }
+        return captchaBindingService;
     }
 
     public static ExceptionBindingService getExceptionBindingService(){

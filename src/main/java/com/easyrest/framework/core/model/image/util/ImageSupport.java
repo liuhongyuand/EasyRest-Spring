@@ -1,11 +1,9 @@
 package com.easyrest.framework.core.model.image.util;
 
+import com.easyrest.framework.core.model.image.CaptchaCode;
+import com.easyrest.framework.core.utils.StringUtils;
 import com.github.cage.Cage;
 import com.github.cage.GCage;
-import com.easyrest.framework.core.model.request.HttpEntity;
-import com.easyrest.framework.core.services.session.SessionParameters;
-import com.easyrest.framework.core.services.session.SessionSupport;
-import com.easyrest.framework.core.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,18 +39,16 @@ public class ImageSupport {
         return imageBytes;
     }
 
-    public static byte[] createVerifyCode(HttpEntity httpEntity){
+    public static CaptchaCode createVerifyCode(){
         Cage cage = new GCage();
         String token = StringUtils.getRandomCaptcha();
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
             cage.draw(token, byteArrayOutputStream);
-            if (SessionSupport.put(httpEntity, SessionParameters.CAPTCHA.getParameter(), token)) {
-                return byteArrayOutputStream.toByteArray();
-            }
+            return new CaptchaCode(token, byteArrayOutputStream.toByteArray());
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
-        return getWhiteImage();
+        return new CaptchaCode(null, getWhiteImage());
     }
 
 }

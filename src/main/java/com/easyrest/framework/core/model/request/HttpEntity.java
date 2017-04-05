@@ -2,7 +2,6 @@ package com.easyrest.framework.core.model.request;
 
 import com.easyrest.framework.configuration.GlobalParameters;
 import com.easyrest.framework.core.model.TransactionContext;
-import com.easyrest.framework.core.services.session.Session;
 import com.easyrest.framework.core.utils.json.JsonTranslation;
 import com.google.gson.internal.LinkedHashTreeMap;
 import com.google.gson.internal.LinkedTreeMap;
@@ -25,7 +24,6 @@ public class HttpEntity {
     private HttpServletResponse response;
     private RequestModel requestModel;
     private List<Class> allowedMethods;
-    private Session session;
     private TransactionContext transactionContext;
     private Map<Object, Object> parameters;
 
@@ -62,14 +60,6 @@ public class HttpEntity {
 
     public List<Class> getAllowedMethods() {
         return allowedMethods;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    public Session getSession() {
-        return session;
     }
 
     public Map<?, ?> getRequestMap() {

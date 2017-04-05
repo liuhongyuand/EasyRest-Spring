@@ -1,14 +1,11 @@
 package com.easyrest.framework.core.services.fileupload;
 
 import com.easyrest.framework.core.model.file.FileUpload;
-import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.file.FileUploadModel;
+import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;
 import com.easyrest.framework.core.services.fileupload.util.FileSupport;
-import com.easyrest.framework.core.services.session.SessionParameters;
-import com.easyrest.framework.core.services.session.api.SessionService;
 import com.easyrest.framework.easyrest.EasyRest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -21,14 +18,10 @@ import java.util.List;
 @Service
 public class FileUploadServiceImpl implements RequestProcessService {
 
-    @Autowired
-    private SessionService sessionService;
-
     @Override
     public Object doProcess(HttpEntity httpEntity) {
         FileUploadModel fileUpload = (FileUploadModel) httpEntity.getRequestModel();
         List<FileUpload> fileUploadList = new LinkedList<>();
-        sessionService.findSessionByEmail(fileUpload.getParameters().get(SessionParameters.UserEmail.getParameter()), httpEntity);
         fileUpload.getFiles().forEach((file) -> {
             FileUpload fileUploadObj = new FileUpload();
             fileUploadObj.setFileName(file.getRealName());
