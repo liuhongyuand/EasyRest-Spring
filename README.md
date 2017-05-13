@@ -118,3 +118,41 @@ public class ExampleModel extends AbstractRequestModel {
 }
 
 ```
+This file is the configuration of the rest.
+
+`@Get({/example})` make this rest should use GET method to visit it at the path of "/example".(You can bind multi path on the same rest and also can set GET and POST at the same time).
+
+`@AllDefined` will check all parameters whether defined in the rest request. If not, EasyRest will return the parameters which not defined.
+
+`@BindService(HomeServiceImpl.class)` will bind a service to process this rest.
+
+There are many other annotations will be mentioned on other chapter.
+
+
+##### ExampleServiceImpl
+
+```java
+package com.easyrest.business.services.business.rest;
+
+import com.easyrest.business.model.request.HomeModel;
+import com.easyrest.framework.core.model.request.HttpEntity;
+import com.easyrest.framework.core.model.response.ResponseEntity;
+import com.easyrest.framework.core.services.business.api.RequestProcessService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ExampleServiceImpl implements RequestProcessService {
+
+    @Override
+    public Object doProcess(HttpEntity httpEntity) {
+        ExampleModel model = (ExampleModel) httpEntity.getRequestModel();
+        return ResponseEntity.buildOkResponse(model);
+    }
+
+}
+
+```
+
+This is the service to process the request and bind on `ExampleModel.java` 
+
+The service should to implement `RequestProcessService`, you can get the `HttpEntity` which has all infomations about the request and cast it to Model which you bind like this: `ExampleModel model = (ExampleModel) httpEntity.getRequestModel();` and all parameters you can get it.

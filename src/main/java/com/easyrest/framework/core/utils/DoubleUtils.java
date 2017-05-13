@@ -12,5 +12,4 @@ public class DoubleUtils {
             return 0.0;
         }
     }
-
 }
