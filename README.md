@@ -45,7 +45,7 @@
 
 ```java
 
-package com.easyrest.business;
+package com.easyrest.example;
 
 import com.easyrest.framework.easyrest.EasyRest;
 import com.easyrest.framework.easyrest.SystemStartupService;
@@ -80,9 +80,9 @@ There are many other configurations will be mentioned on other chapter.
 ##### ExampleModel.java
 
 ```java
-package com.easyrest.business.model.request;
+package com.easyrest.example.model.request;
 
-import com.easyrest.business.services.business.rest.HomeServiceImpl;
+import com.easyrest.example.services.business.rest.HomeServiceImpl;
 import com.easyrest.framework.core.annotations.bean.BindService;
 import com.easyrest.framework.core.annotations.method.Get;
 import com.easyrest.framework.core.annotations.parameter.AllDefined;
@@ -132,9 +132,9 @@ There are many other annotations will be mentioned on other chapter.
 ##### ExampleServiceImpl
 
 ```java
-package com.easyrest.business.services.business.rest;
+package com.easyrest.example.services.business.rest;
 
-import com.easyrest.business.model.request.HomeModel;
+import com.easyrest.example.model.request.HomeModel;
 import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.response.ResponseEntity;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;

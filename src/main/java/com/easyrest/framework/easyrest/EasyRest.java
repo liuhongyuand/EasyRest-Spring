@@ -43,8 +43,8 @@ public class EasyRest {
     }
 
     public EasyRest addRootPackageName(String _rootPackageName){
-        if (!rootPackageName.contains(_rootPackageName)) {
-            rootPackageName.add(_rootPackageName);
+        if (!rootPackageName.contains("/" + _rootPackageName)) {
+            rootPackageName.add("/" + _rootPackageName);
         }
         return this;
     }

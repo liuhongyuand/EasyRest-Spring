@@ -1,6 +1,6 @@
-package com.easyrest.business.model.request;
+package com.easyrest.example.model.request;
 
-import com.easyrest.business.services.business.rest.HomeServiceImpl;
+import com.easyrest.example.services.business.rest.HomeServiceImpl;
 import com.easyrest.framework.core.annotations.async.AsyncRequest;
 import com.easyrest.framework.core.annotations.bean.BindService;
 import com.easyrest.framework.core.annotations.method.Get;

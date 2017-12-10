@@ -1,6 +1,6 @@
-package com.easyrest.business.services.business.rest;
+package com.easyrest.example.services.business.rest;
 
-import com.easyrest.business.model.request.HomeModel;
+import com.easyrest.example.model.request.HomeModel;
 import com.easyrest.framework.core.model.request.HttpEntity;
 import com.easyrest.framework.core.model.response.ResponseEntity;
 import com.easyrest.framework.core.services.business.api.RequestProcessService;

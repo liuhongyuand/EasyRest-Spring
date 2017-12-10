@@ -1,4 +1,4 @@
-package com.easyrest.business.services.business.rest;
+package com.easyrest.example.services.business.rest;
 
 import com.easyrest.framework.core.model.file.FileUpload;
 import com.easyrest.framework.core.model.response.ResponseEntity;

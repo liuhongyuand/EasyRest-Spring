@@ -1,15 +1,15 @@
-package com.easyrest.business;
+package com.easyrest.example;
 
 import com.easyrest.framework.core.services.fileupload.api.FileUploadBindingService;
 import com.easyrest.framework.easyrest.EasyRest;
 import com.easyrest.framework.easyrest.SystemStartupService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by liuhongyu.louie on 2017/2/5.
  */
-@Controller
+@Service
 public class Startup implements SystemStartupService {
 
     private static final EasyRest EASY_REST = new EasyRest();
